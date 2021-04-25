@@ -13,8 +13,10 @@ const ProductScreen = ({ match }) => {
   const { products, dispatchCart, cart } = useContext(GlobalContext);
 
   const [mode, setMode] = useState("default");
-  const [product, setProduct] = useState(products[match.params.id]);
-  const [qty, setQty] = useState(cart.items[product._id].qty || 1);
+  const [product, setProduct] = useState(products[match.params.id] || {});
+  const [qty, setQty] = useState(
+    (cart.items[product._id] && cart.items[product._id].qty) || 1
+  );
 
   useEffect(async () => {}, [setProduct]);
   return !product ? (
